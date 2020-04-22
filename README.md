@@ -7,7 +7,7 @@ https://docs.google.com/forms/d/e/1FAIpQLSd_mB02M9FP86rbHz5rBZwfO6XsjI8BC3texqiR
 
 -This is the YouTube Playlist I referenced to learn SFML lol https://www.youtube.com/playlist?list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9
 
--Ground
+-Ground<br />
 -Generate ground while player moves //i just generated 1000 ground in advance, can last player for ~5 minutes
 -generate as time passes? or generate as last generated tile is near to x = 0
 
