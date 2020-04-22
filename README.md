@@ -30,3 +30,10 @@ https://docs.google.com/forms/d/e/1FAIpQLSd_mB02M9FP86rbHz5rBZwfO6XsjI8BC3texqiR
 -function to detect if player collided with obstacle<br />
 -apply texture to background of the game [OPTIONAL]<br />
 -background music for the game //Done<br />
+<br />
+-Create login function<br />
+
+-server side<br />
+-Create an UDP connection<br />
+-Create login function<br />
+-Create a score ranking(maybe use database)<br />
