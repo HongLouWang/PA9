@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Login">
       <UniqueIdentifier>{ff933934-8f65-4252-8492-02c6bef5777d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\UDP">
+      <UniqueIdentifier>{20e800d2-471b-49cd-9ff5-0991dbf0f31a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -35,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="Obstacle.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UDP\udp_client_sender.cpp">
+      <Filter>Source Files\UDP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

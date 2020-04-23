@@ -138,6 +138,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="udp_server_receiver.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="udp_server_receiver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
