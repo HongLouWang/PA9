@@ -5,11 +5,11 @@
 * Date: Feb 24, 2020 *
 * Description: PA9 SERVER SIDE UDP RECEIVER*
 *******************************************************************************************/
+#define _CRT_SECURE_NO_WARNINGS
 #include "udp_server_receiver.h"
-
 using namespace std;
 
-void udp_server_windows::startServer()
+void udp_server_receiver::startUDPServer()
 {
 	//Startup winsock
 	WSADATA data;
@@ -32,5 +32,92 @@ void udp_server_windows::startServer()
 	{
 		cout << "Can't bind socket! " << WSAGetLastError() << endl;
 	}
+
+	sockaddr_in client;
+	int clientLength = sizeof(client);
+	ZeroMemory(&client, clientLength);
+
+	while (true)
+	{
+		//Wait for message
+		int bytesIn = recvfrom(in, message, 1024, 0, (sockaddr*)&client, &clientLength);
+		if (bytesIn == SOCKET_ERROR)
+		{
+			cout << "Error receiving from client " << WSAGetLastError << endl;
+			continue;
+		}
+
+		//Display message and client info
+		inet_ntop(AF_INET, &client.sin_addr, clientIP, 256);
+		cout << "Message recv from " << clientIP << ":" << message << endl;
+	}
+}
+
+void udp_server_receiver::closeUDPServer(SOCKET in)
+{
+	//close socket
+	closesocket(in);
+	//shutdown winsock
+	WSACleanup();
+}
+
+void udp_server_receiver::setPort(int p)
+{
+	port = p;
+}
+
+void udp_server_receiver::setOut(string str)
+{
+
+}
+
+void udp_server_receiver::setData(WSADATA wsaData)
+{
+	data = wsaData;
+}
+
+void udp_server_receiver::setVersion(WORD ver)
+{
+	version = ver;
+}
+
+void udp_server_receiver::setMessage(char mess[4096])
+{
+	strcpy(message, mess);
+}
+
+void udp_server_receiver::setClientIP(char client[256])
+{
+	strcpy(clientIP, client);
+}
+
+int udp_server_receiver::getPort()
+{
+	return port;
+}
+
+string udp_server_receiver::getOut()
+{
+	return "";
+}
+
+WSADATA udp_server_receiver::getData()
+{
+	return data;
+}
+
+WORD udp_server_receiver::getVersion()
+{
+	return version;
+}
+
+char udp_server_receiver::getMessage()
+{
+	return *message;
+}
+
+char udp_server_receiver::getClientIP()
+{
+	return *clientIP;
 }
 

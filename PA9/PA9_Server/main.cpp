@@ -11,5 +11,8 @@
 
 int main()
 {
+	udp_server_receiver udp;
+	udp.setPort(54000);
+	udp.startUDPServer();
 	return 0;
 }

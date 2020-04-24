@@ -21,9 +21,15 @@
     <ClCompile Include="udp_server_receiver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="udp_server_sender.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="udp_server_receiver.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="udp_server_sender.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
