@@ -26,7 +26,7 @@ https://docs.google.com/forms/d/e/1FAIpQLSd_mB02M9FP86rbHz5rBZwfO6XsjI8BC3texqiR
 -every second counts as +1 score. (Clock.h)? //sfml has Clock and Time library<br />
 -function for scoring system<br />
 -function to save scoring system and display upon player death<br />
--function to detect if player collided with obstacle<br />
+-function to detect if player collided with obstacle //DONE <br />
 -apply texture to background of the game [OPTIONAL]<br />
 -background music for the game //Done<br />
 <br />
