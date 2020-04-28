@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\UDP">
+      <UniqueIdentifier>{6ecd4fa9-22d7-4d78-9edd-548a6abe7564}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Ranklist">
+      <UniqueIdentifier>{506cc55b-753e-48a6-81c9-b9e64a5f8dc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Login">
+      <UniqueIdentifier>{24520e73-e541-48d4-9988-43941babd663}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,6 +45,18 @@
     <ClCompile Include="Gameplay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Login\login.cpp">
+      <Filter>Source Files\Login</Filter>
+    </ClCompile>
+    <ClCompile Include="Ranklist\ranklist.cpp">
+      <Filter>Source Files\Ranklist</Filter>
+    </ClCompile>
+    <ClCompile Include="UDP\udp_client_receiver.cpp">
+      <Filter>Source Files\UDP</Filter>
+    </ClCompile>
+    <ClCompile Include="UDP\udp_client_sender.cpp">
+      <Filter>Source Files\UDP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -58,6 +79,18 @@
     </ClInclude>
     <ClInclude Include="Gameplay.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Login\login.h">
+      <Filter>Source Files\Login</Filter>
+    </ClInclude>
+    <ClInclude Include="Ranklist\ranklist.h">
+      <Filter>Source Files\Ranklist</Filter>
+    </ClInclude>
+    <ClInclude Include="UDP\udp_client_receiver.h">
+      <Filter>Source Files\UDP</Filter>
+    </ClInclude>
+    <ClInclude Include="UDP\udp_client_sender.h">
+      <Filter>Source Files\UDP</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
