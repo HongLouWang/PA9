@@ -1,0 +1,46 @@
+PA 9 to do list lets get it
+
+-sign up for Google Forms group
+https://docs.google.com/forms/d/e/1FAIpQLSd_mB02M9FP86rbHz5rBZwfO6XsjI8BC3texqiRAXYmLLDDzQ/viewform
+
+-Zoom ID: 751-791-2054
+
+-This is the YouTube Playlist I referenced to learn SFML lol https://www.youtube.com/playlist?list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9
+
+-Ground
+	-Generate ground while player moves //DONE, i just generated 1000 ground in advance, can last player for ~1 hour
+	
+
+-obstacles
+	-create obstacles for the game	//DONE, but using vectors, if collision is applied, animation cannot be applied vice versa
+	-apply collision logic on the obstacle	//DONE
+	-apply texture to the obstacle		//DONE
+	-generate obstacles along with the ground	//DONE, Generated 900 of them in advance
+	
+
+-player
+	-make player constantly move to the right	//Done, for debug purposes still controlled using keys
+	-create function that when user presses spacebar, player jumps //DONE
+
+-gameplay	
+	-Increase speed of the player after a set amount of time. (means increases the diffculty) //DONE (player speeds up every 7 seconds)
+
+	-implement every second counts as +1 score. (Clock.h)?
+	use a clock timer to keep time elapsed	:
+	  sf::Clock clk;
+	  sf::Time elapsed = clk.getElapsedTime();
+	  std::cout << elapsed.asSeconds() << std::endl;
+	  (time will come out as a float (1.0000))
+
+	-function for scoring system (always displayed on screen)
+	-apply texture to background of the game [OPTIONAL]
+	-background music for the game //DONE
+	-use collision to make game stop when player hits obstacle	//DONE
+
+-UI
+	-Display GAME OVER Text when game is stopped and player collides with obstacle
+	-implement restart button on screen (or "press enter to restart") to loop playGame()
+	-when player hits the obstacle, give players option to restart
+	-display text/graphics onto the game window to state "Press Spacebar to Jump" 
+
+-Tidy up Code
