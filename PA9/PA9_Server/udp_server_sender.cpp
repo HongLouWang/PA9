@@ -1,3 +1,10 @@
+/*******************************************************************************************
+* Programmer: Shutian Wang *
+* Class: CptS 122, Spring, 2020; Lab Section 14 *
+* Programming Assignment: PA9 *
+* Date: Apr 27, 2020 *
+* Description: PA9 SERVER SIDE UDP SENDER*
+*******************************************************************************************/
 #include "udp_server_sender.h"
 
 void udp_server_sender::sendMessage()

@@ -2,7 +2,7 @@
 * Programmer: Shutian Wang *
 * Class: CptS 122, Spring, 2020; Lab Section 14 *
 * Programming Assignment: PA9 *
-* Date: Feb 24, 2020 *
+* Date: Apr 27, 2020 *
 * Description: PA9 SERVER SIDE UDP RECEIVER*
 *******************************************************************************************/
 #define _CRT_SECURE_NO_WARNINGS
