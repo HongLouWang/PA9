@@ -7,6 +7,7 @@
 class Collider
 {
 public:
+	Collider();
 	Collider(sf::RectangleShape &body);
 	~Collider();
 
@@ -26,7 +27,6 @@ public:
 	sf::Vector2f GetHalfSize() {
 		return body.getSize() / 2.0f;
 	}
-
 
 private:
 	sf::RectangleShape &body;

@@ -14,11 +14,13 @@ public:
 	~Player();
 
 	//Updates animation and movement
-	void Update(float deltaTime);	
+	void Update(float deltaTime, float speed);	
 	//calls window.draw
 	void Draw(sf::RenderWindow& window);	
 	//if player collides with entity, stops the player. If collide with ground, sets canJump to true
 	void onCollision(sf::Vector2f direction);
+
+	
 
 
 	//getter for player's position on the screen

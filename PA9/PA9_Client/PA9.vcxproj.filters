@@ -13,15 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Login">
-      <UniqueIdentifier>{ff933934-8f65-4252-8492-02c6bef5777d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\UDP">
-      <UniqueIdentifier>{20e800d2-471b-49cd-9ff5-0991dbf0f31a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Ranklist">
-      <UniqueIdentifier>{637c2d48-64d3-4b7b-8d5c-93f777556aba}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,17 +33,8 @@
     <ClCompile Include="Obstacle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Login\login.cpp">
-      <Filter>Source Files\Login</Filter>
-    </ClCompile>
-    <ClCompile Include="UDP\udp_client_receiver.cpp">
-      <Filter>Source Files\UDP</Filter>
-    </ClCompile>
-    <ClCompile Include="UDP\udp_client_sender.cpp">
-      <Filter>Source Files\UDP</Filter>
-    </ClCompile>
-    <ClCompile Include="Ranklist\ranklist.cpp">
-      <Filter>Source Files\Ranklist</Filter>
+    <ClCompile Include="Gameplay.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,17 +53,11 @@
     <ClInclude Include="Obstacle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Login\login.h">
-      <Filter>Source Files\Login</Filter>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UDP\udp_client_receiver.h">
-      <Filter>Source Files\UDP</Filter>
-    </ClInclude>
-    <ClInclude Include="UDP\udp_client_sender.h">
-      <Filter>Source Files\UDP</Filter>
-    </ClInclude>
-    <ClInclude Include="Ranklist\ranklist.h">
-      <Filter>Source Files\Ranklist</Filter>
+    <ClInclude Include="Gameplay.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

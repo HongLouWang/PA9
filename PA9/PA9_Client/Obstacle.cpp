@@ -6,7 +6,7 @@ Obstacle::Obstacle(sf::Texture *texture, sf::Vector2u imageCount, float switchTi
 	animation(texture, imageCount, switchTime)
 {
 	row = 0;
-	body.setSize(sf::Vector2f(50.0f, 70.0f));
+	body.setSize(sf::Vector2f(40.0f, 70.0f));
 	body.setOrigin(body.getSize()/ 2.0f);
 	body.setTexture(texture);
 	body.setPosition(position);

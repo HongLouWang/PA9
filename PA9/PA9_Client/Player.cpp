@@ -24,14 +24,17 @@ Player::~Player()
 {
 }
 
-void Player::Update(float deltaTime)
+void Player::Update(float deltaTime, float speed)
 {
+	this->speed = speed;
 			//velocity.x *= 0.5f;	smaller number, shorter time to stop jumping
 	 //initializes velocity to be 0 at begining of every frame.
-	velocity.x = 0.0f;	//change to 200.0f to switch to constantly moving
+	velocity.x = speed;	//0.0f to use keyboard controls //change to speed to switch to constantly moving
 
-	//velocity.x = 65.0f; //initializes velocity to keep moving right regardless
-
+	///////////////////////////////////////////////////////////
+	////Left the Keyboard presses in for tsting purposes. /////
+	////Delete these when finalizing project///////////////////
+	///////////////////////////////////////////////////////////
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		velocity.x -= speed;	//goes -x axis
 
@@ -39,10 +42,13 @@ void Player::Update(float deltaTime)
 		velocity.x += speed;	//goes +x axis
 
 
+
 	//jumping mechanic
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && canJump) {
 
+		//plays Jump sound when spacebar is pressed
 		playSound();
+
 		//initializes cannot jump
 		canJump = false;
 
@@ -51,8 +57,10 @@ void Player::Update(float deltaTime)
 		velocity.y = -sqrt(2.0f * 981.0f * jumpHeight);		//velocity to jump up
 	}
 
+
 	//to fall down again
 	velocity.y += 981.0f * deltaTime;
+
 
 
 

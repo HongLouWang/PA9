@@ -1,6 +1,7 @@
 #include "Collider.h"
 
-
+Collider::Collider() :body (body){
+}
 
 Collider::Collider(sf::RectangleShape &body) : body(body)
 {
@@ -30,10 +31,8 @@ bool Collider::CheckCollision(Collider &other, sf::Vector2f &direction, float pu
 	float intersectY = abs(deltaY) - (otherHalfSize.y + thisHalfSize.y);
 
 	if (intersectX < 0.0f && intersectY < 0.0f) {
-
-			//clamps push posn: 0 <= push <= 1		
+			//clamps push posn: 0 <= push <= 1	
 		push = std::min(std::max(push, 0.0f), 1.0f);
-
 		if (intersectX > intersectY)
 		{
 			if (deltaX > 0.0f) {
@@ -83,9 +82,6 @@ bool Collider::CheckCollision(Collider &other, sf::Vector2f &direction, float pu
 		return true;
 	}
 
-
-
 	//reaches the end when no collision is happening
 	return false;
 }
-
