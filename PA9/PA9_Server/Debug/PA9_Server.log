@@ -1,2 +1,7 @@
-﻿  udp_server_sender.cpp
+﻿  main.cpp
+  udp_server_receiver.cpp
+  udp_server_sender.cpp
+  user-auth.h
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Server\user-auth.h(11,2): warning C4091: 'typedef ': ignored on left of 'userinfo' when no variable is declared
+  Generating Code...
   PA9_Server.vcxproj -> C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\Debug\PA9_Server.exe

@@ -8,8 +8,10 @@
 *******************************************************************************************/
 
 void login_start();
-void login_sendInfo(char username[128], char password[128]);
-void signup_sendInfo(char username[128], char password[128]);
+bool login_sendInfo(char username[128], char password[128]);
+bool signup_sendInfo(char username[128], char password[128]);
 
 bool isLogin();
+
+char name[128];
 bool islogin;

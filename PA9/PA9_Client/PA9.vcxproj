@@ -139,6 +139,7 @@
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Ranklist\ranklist.cpp" />
     <ClCompile Include="UDP\udp_client_receiver.cpp" />
     <ClCompile Include="UDP\udp_client_sender.cpp" />
   </ItemGroup>
@@ -149,6 +150,7 @@
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Ranklist\ranklist.h" />
     <ClInclude Include="UDP\udp_client_receiver.h" />
     <ClInclude Include="UDP\udp_client_sender.h" />
   </ItemGroup>

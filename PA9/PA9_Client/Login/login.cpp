@@ -49,15 +49,15 @@ void login_start()
 }
 
 //SEND LOGIN INFROMATION
-void login_sendInfo(char username[128], char password[128])
+bool login_sendInfo(char username[128], char password[128])
 {
 	udp_client_sender udp_send;
 	udp_client_receiver udp_rec;
 	char mess[4096];
 	char ip[256] = "127.0.0.1";	//THE SERVER IP
-	strcat(mess, "0001-USERNAME-");	//0001--LOGIN
+	strcat(mess, "0001-");	//0001--LOGIN
 	strcat(mess, username);
-	strcat(mess, "-PASSWORD-");
+	strcat(mess, "-");
 	strcat(mess, password);
 	udp_send.setIP(ip);
 	udp_send.setPort(54000);	//THE SERVER PORT
@@ -70,8 +70,10 @@ void login_sendInfo(char username[128], char password[128])
 	{
 		if (strcmp(udp_rec.getMessage(), "OK") == 0)
 		{
-			//login finish
+			//login success
 			islogin = true;
+			//set username
+			strcpy(name, username);
 		}
 		if (strcmp(udp_rec.getMessage(), "ERROR") == 0)
 		{
@@ -83,15 +85,15 @@ void login_sendInfo(char username[128], char password[128])
 }
 
 //SEND SIGNUP INFORMATION
-void signup_sendInfo(char username[128], char password[128])
+bool signup_sendInfo(char username[128], char password[128])
 {
 	udp_client_sender udp_send;
 	udp_client_receiver udp_rec;
 	char mess[4096];
 	char ip[256] = "127.0.0.1";	//THE SERVER IP
-	strcat(mess, "0002-USERNAME-");	//0002--SIGNUP
+	strcat(mess, "0002-");	//0002--SIGNUP
 	strcat(mess, username);
-	strcat(mess, "-PASSWORD-");
+	strcat(mess, "-");
 	strcat(mess, password);
 	udp_send.setIP(ip);
 	udp_send.setPort(54000);
@@ -102,7 +104,7 @@ void signup_sendInfo(char username[128], char password[128])
 	{
 		if (strcmp(udp_rec.getMessage(), "OK") == 0)
 		{
-			//cout << "SUGNUP" << endl;
+			//sign up success
 			islogin = true;
 		}
 		if (strcmp(udp_rec.getMessage(), "ERROR") == 0)
