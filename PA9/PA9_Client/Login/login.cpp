@@ -86,7 +86,7 @@ void signup_sendInfo(char username[128], char password[128])
 	{
 		if (strcmp(udp_rec.getMessage(), "OK") == 0)
 		{
-			//cout << "LOGIN" << endl;
+			//cout << "SUGNUP" << endl;
 			islogin = true;
 		}
 	}
