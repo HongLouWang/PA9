@@ -60,8 +60,13 @@ void login_sendInfo(char username[128], char password[128])
 	{
 		if (strcmp(udp_rec.getMessage(), "OK") == 0)
 		{
-			//cout << "LOGIN" << endl;
+			//login finish
 			islogin = true;
+		}
+		if (strcmp(udp_rec.getMessage(), "ERROR") == 0)
+		{
+			//login error username or password wrong
+			islogin = false;
 		}
 	}
 	udp_send.freeMessage();

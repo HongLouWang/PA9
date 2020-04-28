@@ -141,6 +141,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="udp_server_receiver.cpp" />
     <ClCompile Include="udp_server_sender.cpp" />
+    <ClCompile Include="user-auth.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="udp_server_receiver.h" />
