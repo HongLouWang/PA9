@@ -25,7 +25,6 @@ public:
 	~udp_server_receiver(){}
 
 	void startUDPServer();
-	void closeUDPServer(SOCKET in);
 
 	void setPort(int p);
 	void setOut(string str);

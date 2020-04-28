@@ -7,6 +7,7 @@
 *******************************************************************************************/
 #define _CRT_SECURE_NO_WARNINGS
 #include "udp_server_receiver.h"
+#include "udp_server_sender.h"
 using namespace std;
 
 void udp_server_receiver::startUDPServer()
@@ -40,21 +41,28 @@ void udp_server_receiver::startUDPServer()
 	while (true)
 	{
 		//Wait for message
-		int bytesIn = recvfrom(in, message, 1024, 0, (sockaddr*)&client, &clientLength);
+		int bytesIn = recvfrom(in, message, 4096, 0, (sockaddr*)&client, &clientLength);
 		if (bytesIn == SOCKET_ERROR)
 		{
 			cout << "Error receiving from client " << WSAGetLastError << endl;
 			continue;
 		}
-
-		//Display message and client info
 		inet_ntop(AF_INET, &client.sin_addr, clientIP, 256);
 		cout << "Message recv from " << clientIP << ":" << message << endl;
+		
+		udp_server_sender udp_send;
+		char mess[4096];
+		ZeroMemory(mess, 4096);
+		strcpy(mess, "OK");
+		udp_send.setIP(clientIP);
+		udp_send.setPort(54001);
+		udp_send.setMessage(mess);
+		udp_send.sendMessage();
+		
+		//Display message and client info
+		
 	}
-}
 
-void udp_server_receiver::closeUDPServer(SOCKET in)
-{
 	//close socket
 	closesocket(in);
 	//shutdown winsock
