@@ -6,8 +6,10 @@
 * Description: PA9 SERVER SIDE UDP RECEIVER*
 *******************************************************************************************/
 #define _CRT_SECURE_NO_WARNINGS
+#include "user-auth.h"
 #include "udp_server_receiver.h"
 #include "udp_server_sender.h"
+
 using namespace std;
 
 void udp_server_receiver::startUDPServer()
@@ -25,8 +27,8 @@ void udp_server_receiver::startUDPServer()
 	//Bingd socket to ip address and port
 	SOCKET in = socket(AF_INET, SOCK_DGRAM, 0);
 	sockaddr_in serverHint;
-	serverHint.sin_addr.S_un.S_addr = ADDR_ANY;
-	serverHint.sin_family = AF_INET;
+	serverHint.sin_addr.S_un.S_addr = DEFAULT_RECE_FROM;
+	serverHint.sin_family = DEFAULT_ADDR_TYPE;
 	serverHint.sin_port = htons(port);
 
 	if (bind(in, (sockaddr*)&serverHint, sizeof(serverHint)) == SOCKET_ERROR)
@@ -48,19 +50,13 @@ void udp_server_receiver::startUDPServer()
 			cout << "Error receiving from client " << WSAGetLastError << endl;
 			continue;
 		}
+
+		//Display message and client info
 		inet_ntop(AF_INET, &client.sin_addr, clientIP, 256);
 		cout << "Message recv from " << clientIP << ":" << message << endl;
 		
-		udp_server_sender udp_send;
-		char mess[4096];
-		ZeroMemory(mess, 4096);
-		strcpy(mess, "OK");
-		udp_send.setIP(clientIP);
-		udp_send.setPort(54001);
-		udp_send.setMessage(mess);
-		udp_send.sendMessage();
-		
-		//Display message and client info
+		//Fetch the message send from user
+		result_fetch(message);
 		
 	}
 
@@ -70,6 +66,92 @@ void udp_server_receiver::startUDPServer()
 	//shutdown winsock
 	WSACleanup();
 	cout << "SERVER STOPPED!" << endl;
+}
+
+bool udp_server_receiver::result_fetch(char result[4096])
+{
+	if (strncmp(result, "0001", 4) == 0)
+	{
+		char username[128], password[128];
+
+		ZeroMemory(username, 128);
+		ZeroMemory(password, 128);
+		char* content[10];
+		int num = sizeof(result);
+		split(result, "-", content, &num);
+		strcpy(username, content[1]);
+		strcpy(password, content[2]);
+		if (login_match(username,password) == true)
+		{
+			//username and password match
+			udp_server_sender udp_send;
+			char mess[4096];
+			ZeroMemory(mess, 4096);
+			strcpy(mess, "OK");
+			udp_send.setIP(clientIP);
+			udp_send.setPort(DEFAULT_SEND_PORT);
+			udp_send.setMessage(mess);
+			udp_send.sendMessage();
+
+			return true;
+		}
+		else
+		{
+			//username and password un match
+			udp_server_sender udp_send;
+			char mess[4096];
+			ZeroMemory(mess, 4096);
+			strcpy(mess, "ERROR");
+			udp_send.setIP(clientIP);
+			udp_send.setPort(54001);
+			udp_send.setMessage(mess);
+			udp_send.sendMessage();
+
+			return false;
+		}
+	}
+	else if (strncmp(result, "0002", 4) == 0)
+	{
+		char username[128], password[128];
+
+		ZeroMemory(username, 128);
+		ZeroMemory(password, 128);
+
+		char* content[10];
+		int num = sizeof(result);
+		split(result, "-", content, &num);
+		if (sign_up_infocheck(username) == true)
+		{
+			//sign up success
+			userinfo* user = load();
+			sign_up(username, password, user);
+
+			udp_server_sender udp_send;
+			char mess[4096];
+			ZeroMemory(mess, 4096);
+			strcpy(mess, "OK");
+			udp_send.setIP(clientIP);
+			udp_send.setPort(DEFAULT_SEND_PORT);
+			udp_send.setMessage(mess);
+			udp_send.sendMessage();
+
+			return true;
+		}
+		else
+		{
+			//sign up false, username exist
+			udp_server_sender udp_send;
+			char mess[4096];
+			ZeroMemory(mess, 4096);
+			strcpy(mess, "ERROR");
+			udp_send.setIP(clientIP);
+			udp_send.setPort(54001);
+			udp_send.setMessage(mess);
+			udp_send.sendMessage();
+
+			return false;
+		}
+	}
 }
 
 void udp_server_receiver::setPort(int p)

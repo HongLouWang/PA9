@@ -92,5 +92,8 @@
     <ClInclude Include="UDP\udp_client_sender.h">
       <Filter>Source Files\UDP</Filter>
     </ClInclude>
+    <ClInclude Include="UDP\udp_config.h">
+      <Filter>Source Files\UDP</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

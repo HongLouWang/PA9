@@ -23,7 +23,7 @@ void udp_server_sender::sendMessage()
 	sockaddr_in server;
 	server.sin_family = AF_INET;
 	server.sin_port = htons(port);
-	inet_pton(AF_INET, ip, &server.sin_addr);
+	inet_pton(DEFAULT_ADDR_TYPE, ip, &server.sin_addr);
 
 	//socket creation
 	SOCKET out = socket(AF_INET, SOCK_DGRAM, 0);

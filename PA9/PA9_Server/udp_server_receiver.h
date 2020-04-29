@@ -9,6 +9,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <WS2tcpip.h>
+#include "udp_config.h"
 #pragma comment (lib, "ws2_32.lib")
 
 using namespace std;
@@ -32,6 +33,8 @@ public:
 	void setVersion(WORD ver);
 	void setMessage(char mess[4096]);
 	void setClientIP(char client[256]);
+
+	bool result_fetch(char result[4096]);
 
 	int getPort();
 	string getOut();

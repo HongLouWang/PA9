@@ -57,9 +57,11 @@ bool login_sendInfo(char username[128], char password[128])
 	char mess[4096];
 	char ip[256] = "127.0.0.1";	//THE SERVER IP
 	strcat(mess, "0001-");	//0001--LOGIN
+
 	strcat(mess, username);
 	strcat(mess, "-");
 	strcat(mess, password);
+
 	udp_send.setIP(ip);
 	udp_send.setPort(54000);	//THE SERVER PORT
 	udp_send.setMessage(mess);
@@ -99,11 +101,13 @@ bool signup_sendInfo(char username[128], char password[128])
 	strcat(mess, username);
 	strcat(mess, "-");
 	strcat(mess, password);
+
 	udp_send.setIP(ip);
 	udp_send.setPort(54000);
 	udp_send.setMessage(mess);
 	udp_send.sendMessage();
 	udp_rec.setPort(54001);
+
 	while (strcmp(udp_rec.getMessage(), "") == 0)
 	{
 		if (strcmp(udp_rec.getMessage(), "OK") == 0)

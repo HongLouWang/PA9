@@ -155,6 +155,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="UDP\udp_client_receiver.h" />
     <ClInclude Include="UDP\udp_client_sender.h" />
+    <ClInclude Include="UDP\udp_config.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
