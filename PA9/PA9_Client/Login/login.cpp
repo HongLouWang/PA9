@@ -5,6 +5,7 @@
 * Date: Apr 27, 2020 *
 * Description: PA9 LOGIN FUNCTION*
 *******************************************************************************************/
+#define _CRT_SECURE_NO_WARNINGS
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
 #include <iostream>
@@ -74,14 +75,17 @@ bool login_sendInfo(char username[128], char password[128])
 			islogin = true;
 			//set username
 			strcpy(name, username);
+			return true;
 		}
 		if (strcmp(udp_rec.getMessage(), "ERROR") == 0)
 		{
 			//login error username or password wrong
 			islogin = false;
+			return false;
 		}
 	}
 	udp_send.freeMessage();
+	return false;
 }
 
 //SEND SIGNUP INFORMATION
@@ -106,14 +110,17 @@ bool signup_sendInfo(char username[128], char password[128])
 		{
 			//sign up success
 			islogin = true;
+			return true;
 		}
 		if (strcmp(udp_rec.getMessage(), "ERROR") == 0)
 		{
 			//username exist
 			islogin = false;
+			return false;
 		}
 	}
 	udp_send.freeMessage();
+	return false;
 }
 
 bool isLogin()

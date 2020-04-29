@@ -3,6 +3,6 @@
   udp_server_sender.cpp
   user-auth.h
   Generating Code...
-C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Server\user-auth.h(187): warning C4715: 'signup_infocheck': not all control paths return a value
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Server\user-auth.h(188): warning C4715: 'sign_up_infocheck': not all control paths return a value
 C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Server\user-auth.h(159): warning C4715: 'login_match': not all control paths return a value
   PA9_Server.vcxproj -> C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\Debug\PA9_Server.exe

@@ -158,7 +158,8 @@ bool login_match(char username[128], char password[128])
 	}
 }
 
-bool signup_infocheck(char username[128])
+//check if username exist
+bool sign_up_infocheck(char username[128])
 {
 	userinfo* user = load();
 	userinfo* current = user;
@@ -186,6 +187,7 @@ bool signup_infocheck(char username[128])
 	}
 }
 
+//insert node into userinfo
 void sign_up(char username[128], char password[128], userinfo* head)
 {
 	userinfo* user = (userinfo*)new userinfo;
@@ -207,4 +209,19 @@ void sign_up(char username[128], char password[128], userinfo* head)
 		head = user;
 		//sign up success
 	}
+}
+
+void store(userinfo head)
+{
+	FILE* fp = NULL;
+	fp = fopen("user-score.db", "w+");
+
+	if (fp == NULL)
+	{
+		perror("my_fputs fopen");
+		return;
+	}
+
+	//while()
+
 }

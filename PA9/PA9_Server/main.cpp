@@ -13,6 +13,7 @@ int main()
 {
 	udp_server_receiver udp;
 	udp.setPort(54000);
+	cout << "SERVER STARTING... " << endl;
 	udp.startUDPServer();
 	return 0;
 }

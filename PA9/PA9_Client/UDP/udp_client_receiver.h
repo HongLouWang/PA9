@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <WS2tcpip.h>
@@ -34,7 +33,7 @@ public:
 	string getOut();
 	WSADATA getData();
 	WORD getVersion();
-	char *getMessage();
+	char* getMessage();
 	char getClientIP();
 
 private:

@@ -95,14 +95,14 @@ WSADATA udp_client_receiver::getData()
 	return data;
 }
 
+char* udp_client_receiver::getMessage()
+{
+	return message;
+}
+
 WORD udp_client_receiver::getVersion()
 {
 	return version;
-}
-
-char udp_client_receiver::getMessage()
-{
-	return *message;
 }
 
 char udp_client_receiver::getClientIP()

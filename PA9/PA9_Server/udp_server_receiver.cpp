@@ -38,6 +38,7 @@ void udp_server_receiver::startUDPServer()
 	int clientLength = sizeof(client);
 	ZeroMemory(&client, clientLength);
 
+	cout << "SERVER STARTED!" << endl;
 	while (true)
 	{
 		//Wait for message
@@ -64,9 +65,11 @@ void udp_server_receiver::startUDPServer()
 	}
 
 	//close socket
+	cout << "SERVER STOPPING..." << endl;
 	closesocket(in);
 	//shutdown winsock
 	WSACleanup();
+	cout << "SERVER STOPPED!" << endl;
 }
 
 void udp_server_receiver::setPort(int p)

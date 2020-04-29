@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PA9_Server", "PA9_Server\PA9_Server.vcxproj", "{0B039AA6-94BE-4BF2-8194-544B8FD1EE4F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PA9_Client", "PA9_Client\PA9.vcxproj", "{D24FC48A-EC52-4049-B456-96288052146F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PA9", "PA9_Client\PA9.vcxproj", "{D24FC48A-EC52-4049-B456-96288052146F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,3 +1,4 @@
+#pragma once
 #include "udp_client_sender.h"
 
 void udp_client_sender::sendMessage()
