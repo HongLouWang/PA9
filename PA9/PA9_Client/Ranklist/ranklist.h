@@ -11,10 +11,13 @@ public:
 	udp_client_receiver udp_rec;
 	udp_client_sender udp_send;
 
+	//send score to server
 	void sendScore(char username[128], char score[128]);
+
+	//get score and rank list from server
 	void getScoreList(char username[128]);
 
-	//void setList(string str);
+	//return the rank list
 	string getList();
 
 private:

@@ -47,7 +47,7 @@ public:
 	//returns true if player wants to replay the game
 	void Replay();
 
-
+	
 
 private:
 

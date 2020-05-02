@@ -194,7 +194,8 @@ void udp_server_receiver::result_fetch(char result[4096])
 		char list_cont[sizeof(list) + 1];
 		strcpy(list_cont, list.c_str());
 		ZeroMemory(cont, 1024);
-		int num = sizeof(list);
+
+		num = sizeof(list);
 		split(list_cont, "|", cont, &num);
 		for (int i = 0; i < sizeof(cont); i++)
 		{

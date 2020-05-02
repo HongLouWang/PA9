@@ -13,5 +13,6 @@ bool signup_sendInfo(char username[128], char password[128]);
 
 bool isLogin();
 
+//username
 char name[128];
 bool islogin;

@@ -17,11 +17,9 @@ public:
 		ZeroMemory(message, 4096);
 	}
 
-	~udp_client_sender()
-	{
+	~udp_client_sender(){}
 
-	}
-
+	//send message
 	void sendMessage();
 
 	void setMessage(char mess[4096]);
@@ -32,6 +30,7 @@ public:
 	string getIP();
 	int getPort();
 
+	//free message
 	void freeMessage();
 private:
 

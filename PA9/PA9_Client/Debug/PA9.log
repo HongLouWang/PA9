@@ -1,7 +1,2 @@
-﻿  login.cpp
-C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Login\login.cpp(16,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  ranklist.cpp
-  udp_client_receiver.cpp
-C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\UDP\udp_client_receiver.cpp(31,6): warning C4101: 'bytesIn': unreferenced local variable
-  Generating Code...
+﻿  Gameplay.cpp
   PA9.vcxproj -> C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\Debug\PA9.exe

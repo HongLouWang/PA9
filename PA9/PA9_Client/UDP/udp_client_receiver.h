@@ -18,6 +18,7 @@ public:
 	}
 	~udp_client_receiver() {}
 
+	//start udp client
 	void startUDPclient();
 
 	void setPort(int p);
@@ -27,6 +28,7 @@ public:
 	void setMessage(char mess[4096]);
 	void setClientIP(char client[256]);
 
+	//free message
 	void freeMessage();
 
 	int getPort();

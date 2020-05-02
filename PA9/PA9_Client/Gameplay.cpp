@@ -13,6 +13,7 @@ Gameplay::~Gameplay()
 
 void Gameplay::playGame()
 {
+
 	//renders window and its properties
 	sf::RenderWindow window(sf::VideoMode(640, 480), "RAD-ish!!", sf::Style::Close | sf::Style::Resize);
 
@@ -101,6 +102,8 @@ void Gameplay::playGame()
 
 		}
 
+		
+
 		//timekeeping, uses sf::Clock timer as the timer. Gets elapsed time
 		sf::Time elapsed = timer.getElapsedTime();
 
@@ -130,11 +133,10 @@ void Gameplay::playGame()
 	  ////once player collides with obstacle, isDead() becomes true. ///
 	 //////////////////////////////////////////////////////////////////
 		for (Obstacle &o : obst) {
-			if (o.GetCollider().CheckCollision(playerCollision, direction, 1.0f)) {
+			if (o.GetCollider().CheckCollision(playerCollision, direction, 1.0f)) {	
 				player.onCollision(direction);
 				setIsColliding(true);
 				isDead();
-				
 			}
 			else {
 				setIsColliding(false);
@@ -176,7 +178,7 @@ void Gameplay::playGame()
 		
 
 	}
-
+	window.close();
 }
 
 
@@ -186,6 +188,7 @@ bool Gameplay::isDead()
 		std::cout << "ouch" << std::endl;	//this is just to test if collision is registering between player and obstacle
 		setPauseState(true);
 		createDeathMessage();
+
 	return true;
 	}
 	else {
