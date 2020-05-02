@@ -33,6 +33,24 @@ void ranklist::getScoreList(char username[128])
 	udp_send.sendMessage();
 	udp_send.freeMessage();
 	udp_rec.setPort(DEFAULT_RECE_PORT);
+	udp_rec.startUDPclient();
+
+	//char receive[4096];
+	//ZeroMemory(receive, 4096);
 	
+	while (strcmp(udp_rec.getMessage(), "") != 0)
+	{
+		if (strcmp(udp_rec.getMessage(), "**********") != 0)
+		{
+
+			//Set message to list
+			list = list + udp_rec.getMessage(); 
+		}
+	}
 	
+}
+
+string ranklist::getList()
+{
+	return list;
 }

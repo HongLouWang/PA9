@@ -71,7 +71,7 @@ bool login_sendInfo(char username[128], char password[128])
 	//WAIT FOR RESPONSE
 	udp_rec.setPort(DEFAULT_RECE_PORT);	//SET RECEIVE PORT
 	udp_rec.startUDPclient();
-	while (strcmp(udp_rec.getMessage(),"") == 0)
+	while (strcmp(udp_rec.getMessage(),"") != 0)
 	{
 		if (strcmp(udp_rec.getMessage(), "OK") == 0)
 		{
@@ -110,7 +110,7 @@ bool signup_sendInfo(char username[128], char password[128])
 	udp_send.sendMessage();
 	udp_rec.setPort(DEFAULT_RECE_PORT);
 	udp_rec.startUDPclient();
-	while (strcmp(udp_rec.getMessage(), "") == 0)
+	while (strcmp(udp_rec.getMessage(), "") != 0)
 	{
 		if (strcmp(udp_rec.getMessage(), "OK") == 0)
 		{

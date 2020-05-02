@@ -33,6 +33,8 @@ public:
 	void setIP(char addr[256]);
 	void setPort(int p);
 
+	void freeMessage();
+
 	string getMessage();
 	string getIP();
 	int getPort();

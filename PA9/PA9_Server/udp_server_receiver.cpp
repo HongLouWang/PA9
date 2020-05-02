@@ -13,6 +13,7 @@
 #include <Windows.h>
 #include <chrono>
 #include <thread>
+#include <cstring>
 
 using namespace std;
 
@@ -75,7 +76,7 @@ void udp_server_receiver::startUDPServer()
 void udp_server_receiver::result_fetch(char result[4096])
 {
 	this_thread::sleep_for(chrono::milliseconds(100));
-	if (strncmp(result, "0001", 4) == 0)
+	if (strncmp(result, "0001", 4) == 0)	//LOGIN
 	{
 		char username[128], password[128];
 
@@ -115,7 +116,7 @@ void udp_server_receiver::result_fetch(char result[4096])
 			//return false;
 		}
 	}
-	else if (strncmp(result, "0002", 4) == 0)
+	else if (strncmp(result, "0002", 4) == 0)	//SIGNUP
 	{
 		char username[128], password[128];
 
@@ -157,6 +158,60 @@ void udp_server_receiver::result_fetch(char result[4096])
 			//return false;
 		}
 	}
+	else if (strncmp(result, "0003", 4) == 0)	//SET SCORE
+	{
+		char username[128], score[128];
+		ZeroMemory(username, 128);
+		ZeroMemory(score, 128);
+
+		char* content[10];
+		int num = sizeof(result);
+		split(result, "-", content, &num);
+		strcpy(username, content[1]);
+		strcpy(score, content[2]);
+
+		//SET SCORE AT HERE
+	}
+	else if (strncmp(result, "0004", 4) == 0)	//GET SCORE
+	{
+		char username[128];
+		ZeroMemory(username, 128);
+		char* content[10];
+		int num = sizeof(result);
+		split(result, "-", content, &num);
+		strcpy(username, content[1]);
+
+		//get rank at here
+		string list;
+
+		//send rank to client
+		udp_server_sender udp_send;
+		udp_send.setIP(clientIP);
+		udp_send.setPort(DEFAULT_SEND_PORT);
+
+		char mess[4096];
+		char *cont[1024];
+		char list_cont[sizeof(list) + 1];
+		strcpy(list_cont, list.c_str());
+		ZeroMemory(cont, 1024);
+		int num = sizeof(list);
+		split(list_cont, "|", cont, &num);
+		for (int i = 0; i < sizeof(cont); i++)
+		{
+			strcat(cont[i], "|");
+			udp_send.setMessage(cont[i]);
+			udp_send.sendMessage();
+			udp_send.freeMessage();
+		}
+		char endMessage[4096];
+		ZeroMemory(endMessage, 4096);
+
+		strcat(endMessage, "**********");	//SET END MESSAGE
+		udp_send.setMessage(endMessage);
+		udp_send.sendMessage();
+		udp_send.freeMessage();
+	}
+	//All finish :)
 }
 
 void udp_server_receiver::setPort(int p)

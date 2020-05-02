@@ -43,4 +43,11 @@ https://docs.google.com/forms/d/e/1FAIpQLSd_mB02M9FP86rbHz5rBZwfO6XsjI8BC3texqiR
 	-Display GAME OVER Text when game is stopped and player collides with obstacle<br />
 	-implement restart button on screen (or "press enter to restart") to loop playGame()<br />
 	-when player hits the obstacle, give players option to restart<br />
-	-display text/graphics onto the game window to state "Press Spacebar to Jump" <br />
+	-display text/graphics onto the game window to state "Press Spacebar to Jump" <br /><br />
+-REMIND<br />
+	-This program may only run on windows<br />
+	-Please confirm you have ws2_32.lib on your computer and you are allow to use socket communication<br />
+	-Please run the server program first, the default server ip is 127.0.0.1(ipv4), the default server receive port is 54000, the default client receiver port is 540001, you can change that in udp_config.h<br />
+	-After you first run the program, there will be an UAC alert pop up, please allow the program to have internet access, that's important! If see something like "Can't start Winsock!" please check if you have ws2_32.lib and the program is allowed to have internet access. If see something like "Can't bind socket!", please check the firewall and check the network listening port if other process is using 54000 and 54001, if so, please kill the process<br />
+	-Please make sure Windows Universal CRT SDK is installed when you are compiling the program
+

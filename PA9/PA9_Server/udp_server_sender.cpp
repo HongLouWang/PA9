@@ -68,3 +68,8 @@ int udp_server_sender::getPort()
 	return port;
 }
 
+void udp_server_sender::freeMessage()
+{
+	ZeroMemory(message, 4096);
+}
+
