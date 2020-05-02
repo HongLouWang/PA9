@@ -1,25 +1,7 @@
-﻿  Animation.cpp
-C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Animation.cpp(11,38): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Animation.cpp(12,39): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-  Collider.cpp
-  Gameplay.cpp
-  login.cpp
+﻿  login.cpp
 C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Login\login.cpp(16,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  main.cpp
-  Obstacle.cpp
-  Platform.cpp
-  Player.cpp
   ranklist.cpp
   udp_client_receiver.cpp
 C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\UDP\udp_client_receiver.cpp(31,6): warning C4101: 'bytesIn': unreferenced local variable
-  udp_client_sender.cpp
   Generating Code...
   PA9.vcxproj -> C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\Debug\PA9.exe

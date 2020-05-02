@@ -38,10 +38,10 @@ void udp_client_receiver::startUDPclient()
 			cout << "Error receiving from client " << WSAGetLastError << endl;
 			continue;
 		}
-
-		//Display message and client info
-		//inet_ntop(AF_INET, &client.sin_addr, clientIP, 256);
-		//cout << "Message recv from " << clientIP << ":" << message << endl;
+		if (strcmp(message, "") != 0)
+		{
+			break;
+		}
 	}
 
 	//close socket

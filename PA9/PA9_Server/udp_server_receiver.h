@@ -34,7 +34,7 @@ public:
 	void setMessage(char mess[4096]);
 	void setClientIP(char client[256]);
 
-	bool result_fetch(char result[4096]);
+	void result_fetch(char result[4096]);
 
 	int getPort();
 	string getOut();

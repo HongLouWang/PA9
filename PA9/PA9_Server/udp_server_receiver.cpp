@@ -9,6 +9,10 @@
 #include "user-auth.h"
 #include "udp_server_receiver.h"
 #include "udp_server_sender.h"
+#include <cstdlib>
+#include <Windows.h>
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -67,9 +71,10 @@ void udp_server_receiver::startUDPServer()
 	WSACleanup();
 	cout << "SERVER STOPPED!" << endl;
 }
-
-bool udp_server_receiver::result_fetch(char result[4096])
+	
+void udp_server_receiver::result_fetch(char result[4096])
 {
+	this_thread::sleep_for(chrono::milliseconds(100));
 	if (strncmp(result, "0001", 4) == 0)
 	{
 		char username[128], password[128];
@@ -93,7 +98,7 @@ bool udp_server_receiver::result_fetch(char result[4096])
 			udp_send.setMessage(mess);
 			udp_send.sendMessage();
 
-			return true;
+			//return true;
 		}
 		else
 		{
@@ -107,7 +112,7 @@ bool udp_server_receiver::result_fetch(char result[4096])
 			udp_send.setMessage(mess);
 			udp_send.sendMessage();
 
-			return false;
+			//return false;
 		}
 	}
 	else if (strncmp(result, "0002", 4) == 0)
@@ -135,7 +140,7 @@ bool udp_server_receiver::result_fetch(char result[4096])
 			udp_send.setMessage(mess);
 			udp_send.sendMessage();
 
-			return true;
+			//return true;
 		}
 		else
 		{
@@ -149,7 +154,7 @@ bool udp_server_receiver::result_fetch(char result[4096])
 			udp_send.setMessage(mess);
 			udp_send.sendMessage();
 
-			return false;
+			//return false;
 		}
 	}
 }

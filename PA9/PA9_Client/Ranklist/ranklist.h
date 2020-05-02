@@ -12,12 +12,12 @@ public:
 	udp_client_sender udp_send;
 
 	void sendScore(char username[128], char score[128]);
-	void getScoreList();
+	void getScoreList(char username[128]);
 
-	void setList(string str);
+	//void setList(string str);
 	string getList();
 
 private:
-	string list;
+	string list;	//data receive from server
 };
 

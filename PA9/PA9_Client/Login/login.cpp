@@ -14,6 +14,7 @@
 #include "login.h"
 #include "../UDP/udp_client_sender.h"
 #include "../UDP/udp_client_receiver.h";
+#include "../udp/udp_config.h"
 
 using namespace std;
 
@@ -55,7 +56,7 @@ bool login_sendInfo(char username[128], char password[128])
 	udp_client_sender udp_send;
 	udp_client_receiver udp_rec;
 	char mess[4096];
-	char ip[256] = "127.0.0.1";	//THE SERVER IP
+	char ip[256] = DEFAULT_SERVER_IP;	//THE SERVER IP
 	strcat(mess, "0001-");	//0001--LOGIN
 
 	strcat(mess, username);
@@ -63,12 +64,13 @@ bool login_sendInfo(char username[128], char password[128])
 	strcat(mess, password);
 
 	udp_send.setIP(ip);
-	udp_send.setPort(54000);	//THE SERVER PORT
+	udp_send.setPort(DEFAULT_SEND_PORT);	//THE SERVER PORT
 	udp_send.setMessage(mess);
 	udp_send.sendMessage();
 
 	//WAIT FOR RESPONSE
-	udp_rec.setPort(54001);	//SET RECEIVE PORT
+	udp_rec.setPort(DEFAULT_RECE_PORT);	//SET RECEIVE PORT
+	udp_rec.startUDPclient();
 	while (strcmp(udp_rec.getMessage(),"") == 0)
 	{
 		if (strcmp(udp_rec.getMessage(), "OK") == 0)
@@ -96,18 +98,18 @@ bool signup_sendInfo(char username[128], char password[128])
 	udp_client_sender udp_send;
 	udp_client_receiver udp_rec;
 	char mess[4096];
-	char ip[256] = "127.0.0.1";	//THE SERVER IP
+	char ip[256] = DEFAULT_SERVER_IP;	//THE SERVER IP
 	strcat(mess, "0002-");	//0002--SIGNUP
 	strcat(mess, username);
 	strcat(mess, "-");
 	strcat(mess, password);
 
 	udp_send.setIP(ip);
-	udp_send.setPort(54000);
+	udp_send.setPort(DEFAULT_SEND_PORT);
 	udp_send.setMessage(mess);
 	udp_send.sendMessage();
-	udp_rec.setPort(54001);
-
+	udp_rec.setPort(DEFAULT_RECE_PORT);
+	udp_rec.startUDPclient();
 	while (strcmp(udp_rec.getMessage(), "") == 0)
 	{
 		if (strcmp(udp_rec.getMessage(), "OK") == 0)
