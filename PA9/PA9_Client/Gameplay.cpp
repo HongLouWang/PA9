@@ -115,7 +115,16 @@ void Gameplay::playGame(char username[128])
 			speed += 30.0f;
 		}
 		//print out time as testing
-		std::cout << elapsed.asSeconds() << std::endl;
+		//std::cout << elapsed.asSeconds() << std::endl;
+		
+		//scorekeeping
+		//char scores[128];
+		sf::Time scoring = points.getElapsedTime();
+
+		int finalScore= 0;
+		int holder = scoring.asSeconds();
+		setScore(holder);
+		std::cout << holder << "   (Scoring)" << std::endl;
 
 		sf::Vector2f direction;
 
@@ -140,6 +149,8 @@ void Gameplay::playGame(char username[128])
 			if (o.GetCollider().CheckCollision(playerCollision, direction, 1.0f)) {
 				player.onCollision(direction);
 				setIsColliding(true);
+				setScore(holder);
+				std::cout << "FINAL SCORE IS: " << getScore()<<std::endl;
 				isDead();
 			}
 			else {
@@ -248,9 +259,7 @@ bool Gameplay::isDead()
 {
 	if (getIsColliding()) {
 		std::cout << "ouch" << std::endl;	//this is just to test if collision is registering between player and obstacle
-		std::cout << getscore() << std::endl; // to test the score is accurate
 		setPauseState(true);
-		createDeathMessage();
 
 		return true;
 	}
