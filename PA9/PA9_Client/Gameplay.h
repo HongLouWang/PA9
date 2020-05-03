@@ -11,6 +11,8 @@
 #include "Platform.h"
 #include "Obstacle.h"
 #include <vector>
+#include <chrono>
+#include <thread>
 
 class Gameplay
 {
@@ -46,14 +48,15 @@ public:
 
 	//returns true if player wants to replay the game
 	void Replay();
-
 	
+	int getscore();
+	void setscore(int s);
 
 private:
 
 	bool isColliding = false;
 	bool isPaused = false;	//if game is paused
-
+	int score = 0;
 };
 
 #endif
