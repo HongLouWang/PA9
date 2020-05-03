@@ -144,12 +144,10 @@ void Gameplay::playGame(char username[128])
 	  ////once player collides with obstacle, isDead() becomes true. ///
 	 //////////////////////////////////////////////////////////////////
 		for (Obstacle& o : obst) {
-			// updates score before possible collision
-			setscore(points.getElapsedTime().asSeconds());
 			if (o.GetCollider().CheckCollision(playerCollision, direction, 1.0f)) {
 				player.onCollision(direction);
 				setIsColliding(true);
-				setScore(holder);
+				setscore(holder);
 				std::cout << "FINAL SCORE IS: " << getScore()<<std::endl;
 				isDead();
 			}
