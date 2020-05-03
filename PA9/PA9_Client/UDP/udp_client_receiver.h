@@ -1,6 +1,9 @@
 #pragma once
+#ifndef _UDP_CLIENT_RECEIVER_H_
+#define _UDP_CLIENT_RECEIVER_H_
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+
 #include <WS2tcpip.h>
 #pragma comment (lib, "ws2_32.lib")
 
@@ -50,3 +53,4 @@ private:
 	char message[4096];
 	char clientIP[256];
 };
+#endif // !_UDP_CLIENT_RECEIVER_H_

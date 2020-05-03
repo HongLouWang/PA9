@@ -7,12 +7,40 @@
 * Description: PA9 LOGIN HEADER*
 *******************************************************************************************/
 
-void login_start();
-bool login_sendInfo(char username[128], char password[128]);
-bool signup_sendInfo(char username[128], char password[128]);
+class login
+{
+public:
+	login() { islogin = false; correctInfo = true; }
 
-bool isLogin();
+	~login() {}
 
-//username
-char name[128];
-bool islogin;
+	void login_start();
+
+	bool usernameCheck(char username[128]);
+	bool passwordCheck(char password[128], char repassword[128]);
+
+	void log_in();
+	void signup();
+
+	bool login_sendInfo(char username[128], char password[128]);
+	bool signup_sendInfo(char username[128], char password[128]);
+
+	bool isLogin();
+
+	char* getName() { return name; }
+
+private:
+	//username
+	char name[128];
+	bool islogin;
+	bool correctInfo;
+};
+
+
+
+
+
+
+
+
+

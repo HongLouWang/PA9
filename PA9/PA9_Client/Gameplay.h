@@ -3,24 +3,37 @@
 //Gameplay functions
 
 #pragma once
+
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
+
 #include <iostream>
 #include "Animation.h"
 #include "Player.h"
 #include "Platform.h"
 #include "Obstacle.h"
 #include <vector>
+#include <chrono>
+#include <thread>
+
+#include "Ranklist/ranklist.h"
+#include "Elements/Button.h"
+#include "Elements/TextBox.h"
+
+#include <cstdlib>
+#include <Windows.h>
+#include <cstring>
+using namespace std;
 
 class Gameplay
 {
 public:
 	Gameplay();
 	~Gameplay();
-	
+
 
 	//function to draw window, call player and obstacle functions
-	void playGame();
+	void playGame(char username[128]);
 
 	//returns true if player hits an obstacle.
 	//pauses the game, gives player option to restart
@@ -42,18 +55,19 @@ public:
 	void setPauseState(bool);
 
 	//restarts the game. calls playGame() until player closes the window
-	void restart(); 
+	void restart(char username[128]);
 
 	//returns true if player wants to replay the game
 	void Replay();
 
-	
+	int getscore();
+	void setscore(int s);
 
 private:
 
 	bool isColliding = false;
 	bool isPaused = false;	//if game is paused
-
+	int score = 0;
 };
 
 #endif

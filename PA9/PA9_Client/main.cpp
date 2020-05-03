@@ -19,6 +19,9 @@ Description:
 #include "Obstacle.h"
 #include "Gameplay.h"
 
+#include "Login/login.h"
+
+using namespace std;
 
 static const float VIEW_HEIGHT = 480.0f;
 //makes every sprite the same size and posn when window is resized
@@ -32,8 +35,16 @@ void ResizeView(sf::RenderWindow &window, sf::View& view) {
 int main() {
 	Gameplay gameplay;
 
+	login l;
+	//start to login
+	l.login_start();
+	while (!l.isLogin())
+	{
+		//wait for login finish
+	}
+
 	//starts the game
-	gameplay.playGame();
+	gameplay.playGame(l.getName()/*Get username*/);
 
 	//create function to check if player wants to restart upon death
 	//if not, quits the program

@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Login">
       <UniqueIdentifier>{24520e73-e541-48d4-9988-43941babd663}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Elements">
+      <UniqueIdentifier>{6582ceb9-085b-4182-ab82-d163f9f0a919}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -56,6 +59,12 @@
     </ClCompile>
     <ClCompile Include="UDP\udp_client_sender.cpp">
       <Filter>Source Files\UDP</Filter>
+    </ClCompile>
+    <ClCompile Include="Elements\Button.cpp">
+      <Filter>Source Files\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Elements\TextBox.cpp">
+      <Filter>Source Files\Elements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +103,12 @@
     </ClInclude>
     <ClInclude Include="UDP\udp_config.h">
       <Filter>Source Files\UDP</Filter>
+    </ClInclude>
+    <ClInclude Include="Elements\Button.h">
+      <Filter>Source Files\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Elements\TextBox.h">
+      <Filter>Source Files\Elements</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

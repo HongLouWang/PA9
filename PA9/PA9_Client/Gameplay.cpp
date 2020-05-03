@@ -11,7 +11,7 @@ Gameplay::~Gameplay()
 {
 }
 
-void Gameplay::playGame()
+void Gameplay::playGame(char username[128])
 {
 
 	//renders window and its properties
@@ -63,17 +63,18 @@ void Gameplay::playGame()
 		obst.push_back(Obstacle(&obstacleTexture, sf::Vector2u(4, 1), 0.1f, sf::Vector2f(y, 380.f)));
 		y += 500.0f;
 	}
-	
+
 	float speed = 200.0f;
 	float deltaTime = 0.0f;
 	sf::Clock clock;	//clock starts running as soon as it is created
 	sf::Clock timer;	//timer for time elapsed in game. cannot use clock as it will be restarted to keep track of deltaTime
+	sf::Clock points;
 
-	
 
 	while (window.isOpen()) {
 		sf::Event evt;
 
+		setscore(points.restart().asSeconds());
 		deltaTime = clock.restart().asSeconds();
 
 		//locks to 20 fps framerate to prevent errors when resizing window
@@ -102,15 +103,16 @@ void Gameplay::playGame()
 
 		}
 
-		
+
 
 		//timekeeping, uses sf::Clock timer as the timer. Gets elapsed time
 		sf::Time elapsed = timer.getElapsedTime();
 
+
 		//timer restarts every 7 seconds, speed increases by 30.0f every 7 seconds
 		if (timer.getElapsedTime().asSeconds() >= 7.0000) {
-			elapsed += timer.restart();
-			speed += 30.0f;	
+			elapsed += timer.restart();      
+			speed += 30.0f;
 		}
 		//print out time as testing
 		std::cout << elapsed.asSeconds() << std::endl;
@@ -120,11 +122,11 @@ void Gameplay::playGame()
 		Collider playerCollision = player.GetCollider();
 
 		//applies Platform collision logic to each ground	
-		for (Platform &platform : ground) {																						//essentially does this
-				if (platform.GetCollider().CheckCollision(playerCollision, direction, 1.0f))									//for (int i = 0; i < ground.size(); i++) {
-				player.onCollision(direction);																					//	Platform& platform = platforms[i];
-		}																														//	}	
-		
+		for (Platform& platform : ground) {															//essentially does this
+			if (platform.GetCollider().CheckCollision(playerCollision, direction, 1.0f))			//for (int i = 0; i < ground.size(); i++) {
+				player.onCollision(direction);														//	Platform& platform = platforms[i];
+		}																							//	}	
+
 
 		  /////////////////////////////////////////////////////////////////
 		 //////IMPORTANT OBSTACLE COLLISION LOGIC//////////////////////////
@@ -132,8 +134,10 @@ void Gameplay::playGame()
 	   ////applies Collision logic to each obstacle//////////////////////
 	  ////once player collides with obstacle, isDead() becomes true. ///
 	 //////////////////////////////////////////////////////////////////
-		for (Obstacle &o : obst) {
-			if (o.GetCollider().CheckCollision(playerCollision, direction, 1.0f)) {	
+		for (Obstacle& o : obst) {
+			// updates score before possible collision
+			setscore(points.getElapsedTime().asSeconds());
+			if (o.GetCollider().CheckCollision(playerCollision, direction, 1.0f)) {
 				player.onCollision(direction);
 				setIsColliding(true);
 				isDead();
@@ -143,6 +147,8 @@ void Gameplay::playGame()
 			}
 		}
 
+		// updates score before pause
+		setscore(points.getElapsedTime().asSeconds());
 		//passes deltaTime and player speed to update Player. 
 		//if pauseState() == true, pauses the game, stops updates of player and obstacles
 		if (!pauseState()) {
@@ -152,6 +158,9 @@ void Gameplay::playGame()
 		else if (pauseState()) {
 			player.Update(deltaTime, 0.0f);
 		}
+
+		// resets points for score after pause
+		points.restart();
 
 		//sets camera follows player
 		view.setCenter(player.GetPosition());
@@ -163,20 +172,73 @@ void Gameplay::playGame()
 		player.Draw(window);
 
 		//draws the ground
-		for (Platform &platform : ground) {
+		for (Platform& platform : ground) {
 			platform.Draw(window);
 		}
 
-		for (Obstacle &o : obst) {
+		for (Obstacle& o : obst) {
 			o.Draw(window);
 		}
 
-
 		//calls windows to display
-		window.display(); //double buffer
+		window.display(); //double buffer	
 
+		// sets total score
+		setscore(getscore() + points.getElapsedTime().asSeconds());
 		
+		//When the pause event trigger
+		if (pauseState())
+		{
+			//window.clear();
+			setPauseState(false);
+			
+			//stop music and close window
+			music.stop();
+			window.close();
 
+			//clean console
+			system("cls");
+
+			char* userInput = new char;
+			
+			cout << username << " YOU ARE DEAD, YOUR FINAL SCORE IS:" << getscore() << endl;
+			cout << "NOW WHAT YOU CAN DO:" << endl;
+			cout << "1.RESTART THE GAME" << endl;
+			cout << "2.SEND YOUR SCORE TO SERVER AND GET YOUR RANK" << endl;
+			cout << "3.EXIT" << endl;
+			cin >> userInput;
+			while (1)
+			{
+				if (strcmp(userInput, "1") == 0)
+				{
+					setscore(0);
+					restart(username);
+				}
+				else if (strcmp(userInput, "2") == 0)
+				{
+					//send score
+					ranklist rank;
+					char scoreForSend[128];
+					ZeroMemory(scoreForSend, 128);
+					sprintf(scoreForSend, "%d", getscore());
+					rank.sendScore(username, scoreForSend);
+				}
+				else if (strcmp(userInput, "3") == 0)
+				{
+					break;
+				}
+				else
+				{
+					system("cls");
+					cout << username << " YOU ARE DEAD, YOUR FINAL SCORE IS:" << getscore() << endl;
+					cout << "NOW WHAT YOU CAN DO:" << endl;
+					cout << "1.RESTART THE GAME" << endl;
+					cout << "2.SEND YOUR SCORE TO SERVER AND GET YOUR RANK" << endl;
+					cout << "3.EXIT" << endl;
+				}
+			}
+			break;
+		}
 	}
 	window.close();
 }
@@ -186,10 +248,11 @@ bool Gameplay::isDead()
 {
 	if (getIsColliding()) {
 		std::cout << "ouch" << std::endl;	//this is just to test if collision is registering between player and obstacle
+		std::cout << getscore() << std::endl; // to test the score is accurate
 		setPauseState(true);
 		createDeathMessage();
 
-	return true;
+		return true;
 	}
 	else {
 		return false;
@@ -198,7 +261,7 @@ bool Gameplay::isDead()
 }
 
 sf::Text Gameplay::createDeathMessage() {
-	 //does not work for some reason
+	//does not work for some reason
 	sf::Font font;
 	font.loadFromFile("Pixel.ttf");
 	sf::Text text("GAME OVER!", font);
@@ -232,8 +295,18 @@ void Gameplay::setPauseState(bool state)
 	isPaused = state;
 }
 
-void Gameplay::restart()
+void Gameplay::restart(char username[128])
 {
-	playGame();
+	playGame(username);
 	return;
+}
+
+int Gameplay::getscore()
+{
+	return score;
+}
+
+void Gameplay::setscore(int s)
+{
+	score = s;
 }

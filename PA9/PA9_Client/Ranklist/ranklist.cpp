@@ -1,7 +1,5 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
-#include "../UDP/udp_client_sender.h"
-#include "../UDP/udp_client_receiver.h"
 #include "ranklist.h"
 #include "../UDP/udp_config.h"
 
@@ -42,7 +40,6 @@ void ranklist::getScoreList(char username[128])
 	{
 		if (strcmp(udp_rec.getMessage(), "**********") != 0)
 		{
-
 			//Set message to list
 			list = list + udp_rec.getMessage(); 
 		}

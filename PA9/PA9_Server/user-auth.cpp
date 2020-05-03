@@ -192,12 +192,13 @@ void sign_up(char username[128], char password[128], userinfo* head)
 		head = user;
 		//sign up success
 	}
+	store(head);
 }
 
 void store(userinfo* head)
 {
 	FILE* fp = NULL;
-	fp = fopen("user-score.db", "w+");
+	fp = fopen("user.db", "w+");	
 
 	if (fp == NULL)
 	{

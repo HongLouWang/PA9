@@ -1,9 +1,15 @@
 #pragma once
+#ifndef _UDP_CLIENT_SENDER_H_
+#define _UDP_CLIENT_SENDER_H_
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+
 #include <WS2tcpip.h>
-#include <string>
 #pragma comment (lib, "ws2_32.lib")
+
+
+#include <string>
+
 
 using namespace std;
 
@@ -39,3 +45,5 @@ private:
 	int port;
 
 };
+
+#endif //!_UDP_CLIENT_SENDER_H_

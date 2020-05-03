@@ -1,13 +1,18 @@
 #pragma once
+#ifndef  _RANKLIST_H_
+#define _RANKLIST_H_
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <string.h>
+#include "../UDP/udp_client_receiver.h"
+#include "../UDP/udp_client_sender.h"
 class ranklist
 {
 public:
 	ranklist() {};
 	~ranklist() {};
-	
+
 	udp_client_receiver udp_rec;
 	udp_client_sender udp_send;
 
@@ -23,4 +28,7 @@ public:
 private:
 	string list;	//data receive from server
 };
+
+#endif // ! _RANKLIST_H_
+
 

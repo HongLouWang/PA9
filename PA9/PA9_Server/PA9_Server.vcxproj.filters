@@ -30,6 +30,9 @@
     <ClCompile Include="user-auth.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ranklist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="udp_server_receiver.h">
@@ -39,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="udp_config.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ranklist.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

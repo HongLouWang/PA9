@@ -18,27 +18,77 @@
 
 using namespace std;
 
-void login_start()
+void login::login_start()
 {
 	cout << "CHOOSE WHAT TO DO:" << endl;
 	cout << "1.LOGIN" << endl;
 	cout << "2.SIGN UP FOR NEW ACCOUNT!" << endl;
-
 	char *userInput = new char;
+	cin >> userInput;
+
 	char username[128];
 	char password[128];
 	char repassword[128];
 
 	if (strcmp(userInput, "1") == 0)
 	{
+		ZeroMemory(name, 128);
+		log_in();
+	}
+	else if (strcmp(userInput, "2") == 0)
+	{
+		ZeroMemory(name, 128);
+		signup();
+	}
+}
+
+void login::log_in()
+{
+	char username[128];
+	char password[128];
+	char repassword[128];
+	do
+	{	
+		label:
+		ZeroMemory(username, 128);
+		ZeroMemory(password, 128);
+		ZeroMemory(repassword, 128);
+		if (!correctInfo)
+		{
+			correctInfo = true;
+			cout << "USERNAME OR PASSWORD ILLEGAL" << endl;
+		}
 		cout << "INPUT YOUR USERNAME!" << endl;
 		cin >> username;
 		cout << "INPUT YOUR PASSWORD!" << endl;
 		cin >> password;
-		login_sendInfo(username, password);
-	}
-	else if (strcmp(userInput, "2") == 0)
+		if (login_sendInfo(username, password) == true)
+		{
+			islogin = true;
+		}
+		else
+		{
+			correctInfo = false;
+			goto label;
+		}
+	} while (!usernameCheck(username));
+}
+void login::signup()
+{
+	char username[128];
+	char password[128];
+	char repassword[128];
+	do
 	{
+	label:
+		ZeroMemory(username, 128);
+		ZeroMemory(password, 128);
+		ZeroMemory(repassword, 128);
+		if (!correctInfo)
+		{
+			correctInfo = true;
+			cout << "USERNAME OR PASSWORD illegal" << endl;
+		}
 		cout << "NEW USERS!" << endl;
 		cout << "PLEASE INPUT YOUR USERNAME!" << endl;
 		cin >> username;
@@ -47,15 +97,72 @@ void login_start()
 		cout << "PLEASE RE-INPUT YOUR PASSWORD" << endl;
 		cin >> repassword;
 
+		if (!usernameCheck(username))
+		{
+			correctInfo = false;
+			goto label;
+		}
+
+		if (!passwordCheck(password, repassword))
+		{
+			correctInfo = false;
+			goto label;
+		}
+
+		if (signup_sendInfo(username, password) == true)
+		{
+			islogin = true;
+		}
+		else
+		{
+			goto label;
+		}
+	} while (!usernameCheck(username));
+	
+}
+
+bool login::usernameCheck(char username[128])
+{
+	//no puncuation in username, only accept char lower than 128
+	for (int i = 0; i < sizeof(username); i++)
+	{
+		if (username[i] > 128)
+		{
+			//username illegal
+			return false;
+		}
 	}
+	//username legal
+	return true;
+}
+bool login::passwordCheck(char password[128], char repassword[128])
+{
+	//no puncuation in password, only accept char lower than 128
+	for (int i = 0; i < sizeof(password); i++)
+	{
+		if (password[i] > 128)
+		{
+			//password illegal
+			return false;
+		}
+	}
+
+	if (strcmp(password, repassword) == 0)
+	{
+		//password legal
+		return true;
+	}
+	//password illegal
+	return false;
 }
 
 //SEND LOGIN INFROMATION
-bool login_sendInfo(char username[128], char password[128])
+bool login::login_sendInfo(char username[128], char password[128])
 {
 	udp_client_sender udp_send;
 	udp_client_receiver udp_rec;
 	char mess[4096];
+	ZeroMemory(mess, 4096);
 	char ip[256] = DEFAULT_SERVER_IP;	//THE SERVER IP
 	strcat(mess, "0001-");	//0001--LOGIN
 
@@ -93,11 +200,12 @@ bool login_sendInfo(char username[128], char password[128])
 }
 
 //SEND SIGNUP INFORMATION
-bool signup_sendInfo(char username[128], char password[128])
+bool login::signup_sendInfo(char username[128], char password[128])
 {
 	udp_client_sender udp_send;
 	udp_client_receiver udp_rec;
 	char mess[4096];
+	ZeroMemory(mess, 4096);
 	char ip[256] = DEFAULT_SERVER_IP;	//THE SERVER IP
 	strcat(mess, "0002-");	//0002--SIGNUP
 	strcat(mess, username);
@@ -116,6 +224,8 @@ bool signup_sendInfo(char username[128], char password[128])
 		{
 			//sign up success
 			islogin = true;
+			//set up username
+			strcpy(name, username);
 			return true;
 		}
 		if (strcmp(udp_rec.getMessage(), "ERROR") == 0)
@@ -129,7 +239,7 @@ bool signup_sendInfo(char username[128], char password[128])
 	return false;
 }
 
-bool isLogin()
+bool login::isLogin()
 {
 	return islogin;
 }
