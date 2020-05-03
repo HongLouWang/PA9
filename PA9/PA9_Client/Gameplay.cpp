@@ -69,6 +69,10 @@ void Gameplay::playGame(char username[128])
 	sf::Clock clock;	//clock starts running as soon as it is created
 	sf::Clock timer;	//timer for time elapsed in game. cannot use clock as it will be restarted to keep track of deltaTime
 	sf::Clock points;
+	
+	//Displayer object
+	Displayer displayText;
+	sf::Text Controls = displayText.Controls();
 
 
 	while (window.isOpen()) {
@@ -179,6 +183,10 @@ void Gameplay::playGame(char username[128])
 		window.setView(view);
 		//calls player to draw player on screen
 		player.Draw(window);
+		
+		//draws press spacebar to jump at the begining of the game
+		window.draw(Controls);
+		
 
 		//draws the ground
 		for (Platform& platform : ground) {
