@@ -29,6 +29,7 @@ bool Gameplay::playGame()
 
 	//camera follows the player
 	sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(640.0f, 480.0f));
+	sf::View GOtext(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(100.0f, 200.0f));
 
 	//applies texture to player
 	sf::Texture playerTexture; //declares texture from texture class
@@ -75,6 +76,18 @@ bool Gameplay::playGame()
 	sf::Clock points; //clock for keeping track of score. Starts when game is started, stops whe game is stopped.
 	
 	bool isRestart = false;	//returns true if want game to run, false if not
+
+
+
+
+	//Displayer object
+	Displayer displayText;
+	sf::Text GameOver = displayText.GameOver();
+	sf::Text Controls = displayText.Controls();
+
+
+
+
 
 	while (window.isOpen()) {
 		sf::Event evt;
@@ -123,11 +136,9 @@ bool Gameplay::playGame()
 		sf::Time scoring = points.getElapsedTime();
 		//std::cout << scoring.asSeconds() <<"   (Scoring)"<< std::endl;
 
-		char finalScore[128];
+		int finalScore= 0;
 		int holder = scoring.asSeconds();
 		std::cout << holder << "   (Scoring)" << std::endl;
-		_itoa(holder, finalScore, 10);
-		//char finalScore = static_cast<char> (holder);
 
 		sf::Vector2f direction;
 
@@ -151,11 +162,11 @@ bool Gameplay::playGame()
 				player.onCollision(direction);
 
 				setIsColliding(true);
-				setScore(*finalScore);
+				setScore(holder);
 				std::cout << "FINAL SCORE IS: " << getScore()<<std::endl;
 				isDead();
 				isRestart = Replay();
-
+				
 
 				if (isRestart == true) {
 					window.close();
@@ -183,12 +194,22 @@ bool Gameplay::playGame()
 
 		//sets camera follows player
 		view.setCenter(player.GetPosition());
+		GOtext.move(player.GetPosition());
+		
 
 		//clears the buffer when player moves
 		window.clear();
 		window.setView(view);
+		//window.draw(GameOver);
+
 		//calls player to draw player on screen
 		player.Draw(window);
+		//if (getIsColliding())
+			
+
+		//draws press spacebar to jump at the begining of the game
+		window.draw(Controls);
+			
 
 		//draws the ground
 		for (Platform &platform : ground) {
@@ -279,11 +300,11 @@ bool Gameplay::Replay()
 }
 
 
-char Gameplay::getScore()
+int Gameplay::getScore()
 {
 	return score;
 }
 
-void Gameplay::setScore(char &s) {
+void Gameplay::setScore(int &s) {
 	score = s;
 }

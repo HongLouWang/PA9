@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Platform.h"
 #include "Obstacle.h"
+#include "Displayer.h"
 #include <vector>
 
 class Gameplay
@@ -48,10 +49,10 @@ public:
 	bool Replay();
 
 	//gets score
-	char getScore();
+	int getScore();
 
 	//sets final score
-	void setScore(char&);
+	void setScore(int&);
 
 
 
