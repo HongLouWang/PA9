@@ -4,6 +4,9 @@
 
 Gameplay::Gameplay()
 {
+	isColliding = false;
+	isPaused = false;	//if game is paused
+	score = ' ';
 }
 
 
@@ -11,9 +14,8 @@ Gameplay::~Gameplay()
 {
 }
 
-void Gameplay::playGame()
+bool Gameplay::playGame()
 {
-
 	//renders window and its properties
 	sf::RenderWindow window(sf::VideoMode(640, 480), "RAD-ish!!", sf::Style::Close | sf::Style::Resize);
 
@@ -59,22 +61,24 @@ void Gameplay::playGame()
 
 	//cheat way of generating 900 obstacles
 	float y = 500.0f;
-	for (int i = 0; i < 900; ++i) {
+	for (int i = 0; i < 900; ++i) { 
 		obst.push_back(Obstacle(&obstacleTexture, sf::Vector2u(4, 1), 0.1f, sf::Vector2f(y, 380.f)));
 		y += 500.0f;
 	}
 	
 	float speed = 200.0f;
 	float deltaTime = 0.0f;
+
+	//used different clocks as each clock has different purposes, and are restarted at different intervals.
 	sf::Clock clock;	//clock starts running as soon as it is created
 	sf::Clock timer;	//timer for time elapsed in game. cannot use clock as it will be restarted to keep track of deltaTime
-	sf::Clock points;
+	sf::Clock points; //clock for keeping track of score. Starts when game is started, stops whe game is stopped.
 	
+	bool isRestart = false;	//returns true if want game to run, false if not
 
 	while (window.isOpen()) {
 		sf::Event evt;
 
-		setscore(points.restart().asSeconds());
 		deltaTime = clock.restart().asSeconds();
 
 		//locks to 20 fps framerate to prevent errors when resizing window
@@ -103,19 +107,27 @@ void Gameplay::playGame()
 
 		}
 
-		
-
 		//timekeeping, uses sf::Clock timer as the timer. Gets elapsed time
 		sf::Time elapsed = timer.getElapsedTime();
-
-
 		//timer restarts every 7 seconds, speed increases by 30.0f every 7 seconds
 		if (timer.getElapsedTime().asSeconds() >= 7.0000) {
 			elapsed += timer.restart();
 			speed += 30.0f;	
 		}
 		//print out time as testing
-		std::cout << elapsed.asSeconds() << std::endl;
+		std::cout <<"\t\t\t\t" <<elapsed.asSeconds() << "     (reset every 7 seconds)"<<std::endl;
+
+
+		//scorekeeping
+		//char scores[128];
+		sf::Time scoring = points.getElapsedTime();
+		//std::cout << scoring.asSeconds() <<"   (Scoring)"<< std::endl;
+
+		char finalScore[128];
+		int holder = scoring.asSeconds();
+		std::cout << holder << "   (Scoring)" << std::endl;
+		_itoa(holder, finalScore, 10);
+		//char finalScore = static_cast<char> (holder);
 
 		sf::Vector2f direction;
 
@@ -126,7 +138,7 @@ void Gameplay::playGame()
 				if (platform.GetCollider().CheckCollision(playerCollision, direction, 1.0f))									//for (int i = 0; i < ground.size(); i++) {
 				player.onCollision(direction);																					//	Platform& platform = platforms[i];
 		}																														//	}	
-
+		
 
 		  /////////////////////////////////////////////////////////////////
 		 //////IMPORTANT OBSTACLE COLLISION LOGIC//////////////////////////
@@ -135,20 +147,30 @@ void Gameplay::playGame()
 	  ////once player collides with obstacle, isDead() becomes true. ///
 	 //////////////////////////////////////////////////////////////////
 		for (Obstacle &o : obst) {
-			// updates score before possible collision
-			setscore(points.getElapsedTime().asSeconds());
-			if (o.GetCollider().CheckCollision(playerCollision, direction, 1.0f)) {	
+			if (o.GetCollider().CheckCollision(playerCollision, direction, 1.0f)) {		//if player collides
 				player.onCollision(direction);
+
 				setIsColliding(true);
+				setScore(*finalScore);
+				std::cout << "FINAL SCORE IS: " << getScore()<<std::endl;
 				isDead();
+				isRestart = Replay();
+
+
+				if (isRestart == true) {
+					window.close();
+					setIsColliding(false);
+					setPauseState(false);
+					break;;
+				}
+
 			}
 			else {
 				setIsColliding(false);
+				
 			}
 		}
 
-		// updates score before pause
-		setscore(points.getElapsedTime().asSeconds());
 		//passes deltaTime and player speed to update Player. 
 		//if pauseState() == true, pauses the game, stops updates of player and obstacles
 		if (!pauseState()) {
@@ -158,9 +180,6 @@ void Gameplay::playGame()
 		else if (pauseState()) {
 			player.Update(deltaTime, 0.0f);
 		}
-
-		// resets points for score after pause
-		points.restart(); 
 
 		//sets camera follows player
 		view.setCenter(player.GetPosition());
@@ -180,14 +199,16 @@ void Gameplay::playGame()
 			o.Draw(window);
 		}
 
-		//calls windows to display
-		window.display(); //double buffer	
 
-		// sets total score
-		setscore(getscore() + points.getElapsedTime().asSeconds());
-	
+		//calls windows to display
+		window.display(); //double buffer
+
+		
+
 	}
-	window.close();
+
+	return isRestart;
+
 }
 
 
@@ -195,10 +216,7 @@ bool Gameplay::isDead()
 {
 	if (getIsColliding()) {
 		std::cout << "ouch" << std::endl;	//this is just to test if collision is registering between player and obstacle
-		std::cout << getscore() << std::endl; // to test the score is accurate
-		setPauseState(true);
-		createDeathMessage();
-
+		setPauseState(true);	
 	return true;
 	}
 	else {
@@ -248,12 +266,24 @@ void Gameplay::restart()
 	return;
 }
 
-int Gameplay::getscore()
+bool Gameplay::Replay()
+{
+		std::cout << "Press Enter to Replay!" << std::endl;
+		std::cin.ignore();
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+			return true;
+		else 
+			return false;
+
+}
+
+
+char Gameplay::getScore()
 {
 	return score;
 }
 
-void Gameplay::setscore(int s)
-{
+void Gameplay::setScore(char &s) {
 	score = s;
 }

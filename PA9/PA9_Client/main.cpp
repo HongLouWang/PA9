@@ -7,8 +7,6 @@ Description:
 //Player sprites are from rpgtileset.com/sprite/running-radish-sprite-for-rpg-maker-mv/
 */
 
-
-
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
 #include <iostream>
@@ -31,12 +29,15 @@ void ResizeView(sf::RenderWindow &window, sf::View& view) {
 
 int main() {
 	Gameplay gameplay;
+	bool run = false;
 
-	//starts the game
-	gameplay.playGame();
+	//starts the game once, then loops as long as playGame returns true.
+	do {
 
-	//create function to check if player wants to restart upon death
-	//if not, quits the program
+		run = gameplay.playGame();
+
+	}while(run);
+
 
 	return 0;
 }

@@ -11,8 +11,6 @@
 #include "Platform.h"
 #include "Obstacle.h"
 #include <vector>
-#include <chrono>
-#include <thread>
 
 class Gameplay
 {
@@ -21,8 +19,8 @@ public:
 	~Gameplay();
 	
 
-	//function to draw window, call player and obstacle functions
-	void playGame();
+	//function to draw window, call player and obstacle functions. Returns true to run game. False to not run.
+	bool playGame();
 
 	//returns true if player hits an obstacle.
 	//pauses the game, gives player option to restart
@@ -47,16 +45,22 @@ public:
 	void restart(); 
 
 	//returns true if player wants to replay the game
-	void Replay();
-	
-	int getscore();
-	void setscore(int s);
+	bool Replay();
+
+	//gets score
+	char getScore();
+
+	//sets final score
+	void setScore(char&);
+
+
 
 private:
 
-	bool isColliding = false;
-	bool isPaused = false;	//if game is paused
-	int score = 0;
+	bool isColliding;
+	bool isPaused;
+	char score;
+
 };
 
 #endif
