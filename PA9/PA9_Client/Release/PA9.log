@@ -1,0 +1,40 @@
+﻿  Animation.cpp
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Animation.cpp(11,38): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Animation.cpp(12,39): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+  Collider.cpp
+  Displayer.cpp
+  Button.cpp
+  TextBox.cpp
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Elements\TextBox.cpp(48,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Elements\TextBox.cpp(85,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Elements\TextBox.cpp(112,29): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Elements\TextBox.cpp(116,34): warning C4018: '>': signed/unsigned mismatch
+  Gameplay.cpp
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Gameplay.cpp(82,17): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Gameplay.cpp(131,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  login.cpp
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Login\login.cpp(16,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Login\login.cpp(29,7): warning C4101: 'username': unreferenced local variable
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Login\login.cpp(31,7): warning C4101: 'repassword': unreferenced local variable
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Login\login.cpp(30,7): warning C4101: 'password': unreferenced local variable
+  main.cpp
+  Obstacle.cpp
+  Platform.cpp
+  Player.cpp
+  ranklist.cpp
+  udp_client_receiver.cpp
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\UDP\udp_client_receiver.cpp(31,6): warning C4101: 'bytesIn': unreferenced local variable
+  udp_client_sender.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 385 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  PA9.vcxproj -> C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\Release\PA9.exe

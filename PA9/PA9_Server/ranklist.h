@@ -25,13 +25,15 @@ public:
 
 	void split(char* src, const char* separator, char** dest, int* num);
 	list* load();
-	void insert(char username[128], char score[128], list* head);
-	void update(char username[128], char score[128]);
+	list* insert(char username[128], char score[128], list** head_ptr);
+	void update(char username[128], char score[128], list* l);
 	bool isExist(char username[128]);
-	int getMaxRank();	
+	int getMaxRank();
+	void readyToSend(list* head);
 	void store(list* head);
-
+	string scoreToSend;
 private:
 	int line_cnt = 0;
+	
 };
 

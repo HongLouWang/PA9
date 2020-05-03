@@ -1,0 +1,16 @@
+﻿  main.cpp
+  ranklist.cpp
+  udp_server_receiver.cpp
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Server\udp_server_receiver.cpp(214,9): warning C4101: 'cont': unreferenced local variable
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Server\udp_server_receiver.cpp(213,8): warning C4101: 'mess': unreferenced local variable
+  udp_server_sender.cpp
+  user-auth.cpp
+  user-auth.h
+Release\user-auth.obj : warning LNK4042: object specified more than once; extras ignored
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Server\user-auth.cpp(171): warning C4715: 'sign_up_infocheck': not all control paths return a value
+C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Server\user-auth.cpp(142): warning C4715: 'login_match': not all control paths return a value
+  All 239 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  PA9_Server.vcxproj -> C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\Release\PA9_Server.exe

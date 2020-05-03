@@ -4,6 +4,7 @@
 
 Gameplay::Gameplay()
 {
+
 }
 
 
@@ -13,7 +14,7 @@ Gameplay::~Gameplay()
 
 void Gameplay::playGame(char username[128])
 {
-
+	second_program_start = time(0);
 	//renders window and its properties
 	sf::RenderWindow window(sf::VideoMode(640, 480), "RAD-ish!!", sf::Style::Close | sf::Style::Resize);
 
@@ -77,8 +78,9 @@ void Gameplay::playGame(char username[128])
 
 	while (window.isOpen()) {
 		sf::Event evt;
-
-		setscore(points.restart().asSeconds());
+		second_now = time(0);
+		int score_tmp = second_now - second_program_start;
+		setscore(score_tmp);
 		deltaTime = clock.restart().asSeconds();
 
 		//locks to 20 fps framerate to prevent errors when resizing window
@@ -127,8 +129,8 @@ void Gameplay::playGame(char username[128])
 
 		int finalScore= 0;
 		int holder = scoring.asSeconds();
-		setScore(holder);
-		std::cout << holder << "   (Scoring)" << std::endl;
+		setscore(score_tmp);
+		std::cout << getscore() << "   (Scoring)" << std::endl;
 
 		sf::Vector2f direction;
 
@@ -151,8 +153,8 @@ void Gameplay::playGame(char username[128])
 			if (o.GetCollider().CheckCollision(playerCollision, direction, 1.0f)) {
 				player.onCollision(direction);
 				setIsColliding(true);
-				setscore(holder);
-				std::cout << "FINAL SCORE IS: " << getScore()<<std::endl;
+				setscore(score_tmp);
+				std::cout << "FINAL SCORE IS: " << getscore()<<std::endl;
 				isDead();
 			}
 			else {
@@ -161,7 +163,7 @@ void Gameplay::playGame(char username[128])
 		}
 
 		// updates score before pause
-		setscore(points.getElapsedTime().asSeconds());
+		setscore(score_tmp);
 		//passes deltaTime and player speed to update Player. 
 		//if pauseState() == true, pauses the game, stops updates of player and obstacles
 		if (!pauseState()) {
@@ -201,7 +203,7 @@ void Gameplay::playGame(char username[128])
 		window.display(); //double buffer	
 
 		// sets total score
-		setscore(getscore() + points.getElapsedTime().asSeconds());
+		setscore(score_tmp);
 		
 		//When the pause event trigger
 		if (pauseState())
@@ -214,7 +216,7 @@ void Gameplay::playGame(char username[128])
 			window.close();
 
 			//clean console
-			system("cls");
+            system("cls");
 
 			char* userInput = new char;
 			
@@ -228,20 +230,38 @@ void Gameplay::playGame(char username[128])
 			{
 				if (strcmp(userInput, "1") == 0)
 				{
+					strcpy(userInput, "");
+					second_program_start = time(0);
 					setscore(0);
 					restart(username);
 				}
 				else if (strcmp(userInput, "2") == 0)
 				{
 					//send score
+					strcpy(userInput, "");
 					ranklist rank;
 					char scoreForSend[128];
 					ZeroMemory(scoreForSend, 128);
 					sprintf(scoreForSend, "%d", getscore());
 					rank.sendScore(username, scoreForSend);
+					this_thread::sleep_for(chrono::milliseconds(500));
+					rank.getScoreList(username);
+					this_thread::sleep_for(chrono::milliseconds(1000));
+					cout << endl;	
+					cout << rank.list;	
+					cout << endl;
+					for (int i = 0; i < 10; i++)
+					{
+						cout << "THIS WINDOW WILL BE CLOSE IN " << 10 - i << " SECONDS" << endl;
+						this_thread::sleep_for(chrono::milliseconds(1000));
+					}
+					goto GAMECLOSE;
+					break;
 				}
 				else if (strcmp(userInput, "3") == 0)
 				{
+					strcpy(userInput, "");
+					goto GAMECLOSE;
 					break;
 				}
 				else
@@ -257,7 +277,9 @@ void Gameplay::playGame(char username[128])
 			break;
 		}
 	}
-	window.close();
+	
+	GAMECLOSE:window.close();
+
 }
 
 

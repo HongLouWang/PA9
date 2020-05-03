@@ -61,7 +61,7 @@ void login::log_in()
 		cout << "INPUT YOUR USERNAME!" << endl;
 		cin >> username;
 		cout << "INPUT YOUR PASSWORD!" << endl;
-		cin >> password;
+			cin >> password;
 		if (login_sendInfo(username, password) == true)
 		{
 			islogin = true;

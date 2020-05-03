@@ -209,13 +209,18 @@ void store(userinfo* head)
 	userinfo* u = head;
 	while (u != NULL)
 	{
-		char temp[1024];
-		ZeroMemory(temp, 1024);
+		char temp[2000];
+		ZeroMemory(temp, 2000);
 		strcat(temp, u->username);
 		strcat(temp, ",");
 
 		strcat(temp, u->password);
 		strcat(temp, ",");
+
+		if (u->next != NULL)
+		{
+			strcat(temp, "\n");
+		}
 
 		fputs(temp, fp);
 		u = u->next;

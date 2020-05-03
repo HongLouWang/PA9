@@ -19,6 +19,7 @@
 #include "Ranklist/ranklist.h"
 #include "Elements/Button.h"
 #include "Elements/TextBox.h"
+#include "Displayer.h"
 
 #include <cstdlib>
 #include <Windows.h>
@@ -64,10 +65,11 @@ public:
 	void setscore(int s);
 
 private:
-
+	time_t second_program_start;
+	time_t second_now;
 	bool isColliding = false;
 	bool isPaused = false;	//if game is paused
-	int score = 0;
+	int score;
 };
 
 #endif

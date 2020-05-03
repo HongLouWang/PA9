@@ -9,6 +9,7 @@
 #include "user-auth.h"
 #include "udp_server_receiver.h"
 #include "udp_server_sender.h"
+#include "ranklist.h"
 #include <cstdlib>
 #include <Windows.h>
 #include <chrono>
@@ -126,11 +127,22 @@ void udp_server_receiver::result_fetch(char result[4096])
 		char* content[10];
 		int num = sizeof(result);
 		split(result, "-", content, &num);
+		strcpy(username, content[1]);
+		strcpy(password, content[2]);
 		if (sign_up_infocheck(username) == true)
 		{
 			//sign up success
 			userinfo* user = load();
 			sign_up(username, password, user);
+
+			ranklist rank;
+			list* l;
+			list** l_ptr;
+			char score[128] = "0000";
+			l = rank.load();
+			l_ptr = &l;
+			rank.insert(username, score, l_ptr);
+			rank.store(l);
 
 			udp_server_sender udp_send;
 			char mess[4096];
@@ -171,6 +183,10 @@ void udp_server_receiver::result_fetch(char result[4096])
 		strcpy(score, content[2]);
 
 		//SET SCORE AT HERE
+		ranklist rank;
+		list* l;
+		l = rank.load();
+		rank.update(username,score,l);
 	}
 	else if (strncmp(result, "0004", 4) == 0)	//GET SCORE
 	{
@@ -182,7 +198,12 @@ void udp_server_receiver::result_fetch(char result[4096])
 		strcpy(username, content[1]);
 
 		//get rank at here
-		string list;
+		string listscore;
+		ranklist rank;
+		list* l;
+		l = rank.load();
+		rank.readyToSend(l);
+		listscore = rank.scoreToSend;
 
 		//send rank to client
 		udp_server_sender udp_send;
@@ -192,18 +213,12 @@ void udp_server_receiver::result_fetch(char result[4096])
 		char mess[4096];
 		char *cont[1024];
 		char list_cont[sizeof(list) + 1];
-		strcpy(list_cont, list.c_str());
-		ZeroMemory(cont, 1024);
+		strcpy(list_cont, listscore.c_str());
 
-		num = sizeof(list);
-		split(list_cont, "|", cont, &num);
-		for (int i = 0; i < sizeof(cont); i++)
-		{
-			strcat(cont[i], "|");
-			udp_send.setMessage(cont[i]);
-			udp_send.sendMessage();
-			udp_send.freeMessage();
-		}
+		udp_send.setMessage(list_cont);
+		udp_send.sendMessage();
+		udp_send.freeMessage();
+		
 		char endMessage[4096];
 		ZeroMemory(endMessage, 4096);
 

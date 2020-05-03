@@ -66,6 +66,9 @@
     <ClCompile Include="Elements\TextBox.cpp">
       <Filter>Source Files\Elements</Filter>
     </ClCompile>
+    <ClCompile Include="Displayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="Elements\TextBox.h">
       <Filter>Source Files\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Displayer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

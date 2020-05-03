@@ -1,8 +1,0 @@
-﻿  Gameplay.cpp
-C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Gameplay.cpp(77,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Gameplay.cpp(139,46): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Gameplay.cpp(151,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\PA9_Client\Gameplay.cpp(187,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  main.cpp
-  Generating Code...
-  PA9.vcxproj -> C:\Users\wangb\OneDrive - Washington State University (email.wsu.edu)\Study\CPTS_122\PAs\PA9\PA9\Debug\PA9.exe

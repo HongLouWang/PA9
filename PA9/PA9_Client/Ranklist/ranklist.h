@@ -13,9 +13,6 @@ public:
 	ranklist() {};
 	~ranklist() {};
 
-	udp_client_receiver udp_rec;
-	udp_client_sender udp_send;
-
 	//send score to server
 	void sendScore(char username[128], char score[128]);
 
@@ -25,8 +22,10 @@ public:
 	//return the rank list
 	string getList();
 
-private:
 	string list;	//data receive from server
+
+private:
+	
 };
 
 #endif // ! _RANKLIST_H_

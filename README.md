@@ -45,6 +45,7 @@ https://docs.google.com/forms/d/e/1FAIpQLSd_mB02M9FP86rbHz5rBZwfO6XsjI8BC3texqiR
 	-when player hits the obstacle, give players option to restart<br />
 	-display text/graphics onto the game window to state "Press Spacebar to Jump" <br /><br />
 -REMIND<br />
+	-We have three test users now, the username and password is:TESTUSERNAME1 PASSWORD,TESTUSERNAME2 PASSWORD,TESTUSERNAME3 PASSWORD(both upper case)<br />
 	-This program may only run on windows<br />
 	-Please confirm you have ws2_32.lib on your computer and you are allow to use socket communication<br />
 	-Please run the server program first, the default server ip is 127.0.0.1(ipv4), the default server receive port is 54000, the default client receiver port is 540001, you can change that in udp_config.h<br />

@@ -95,6 +95,7 @@ list* ranklist::load()
 			}
 		}
 	}
+	return head;
 }
 
 int ranklist::getMaxRank()
@@ -109,42 +110,42 @@ int ranklist::getMaxRank()
 			line_cnt++;
 		}
 	}
-	return line_cnt;
+	return line_cnt + 1;
 }
 
-void ranklist::insert(char username[128],char score[128],list* head)
+list* ranklist::insert(char username[128],char score[128],list** head_ptr)
 {
 	list* l = (list*)new list;
 	strcpy(l->score, score);
 	strcpy(l->username, username);
-	char inttemp[10] = { 0 };
+	char inttemp[10];
+	ZeroMemory(inttemp, 10);
 	sprintf(inttemp, "%d", getMaxRank());
 	strcpy(l->ranklist, inttemp);
 	//strcpy(l->ranklist,atoi())
 
-	if (head == NULL)
+	if (*head_ptr == NULL)
 	{
-		head = l;
+		*head_ptr = l;
 		l->next = NULL;
 		l->previous = NULL;
 	}
 	else
 	{
-		l->next = head;
+		l->next = *head_ptr;
 		l->previous = NULL;
-		head = l;
+		*head_ptr = l;
 	}
-	store(head);
+	return *head_ptr;
 }
 
-void ranklist::update(char username[128],char score[128])
+void ranklist::update(char username[128],char score[128], list* l)
 {
-	list* l = load();
 	list* current = l;
 	if (strcmp(username, l->username) == 0)
 	{
 		//user exist
-		strcpy(l->score, score);
+		strcpy(current->score, score);
 	}
 	else
 	{
@@ -160,10 +161,11 @@ void ranklist::update(char username[128],char score[128])
 		else if (strcmp(username, current->username) == 0)
 		{
 			//username exist
-			strcpy(l->score, score);
+			strcpy(current->score, score);
+			current = l;
 		}
 	}
-	store(l);
+	store(current);
 }
 
 bool ranklist::isExist(char username[128])
@@ -194,6 +196,33 @@ bool ranklist::isExist(char username[128])
 	}
 }
 
+void ranklist::readyToSend(list* head)
+{
+	list* l = head;
+	char temp[20000];
+	ZeroMemory(temp, 20000);
+
+	while (l != NULL)
+	{
+		strcat(temp, l->ranklist);
+		strcat(temp, ",");
+
+		strcat(temp, l->username);
+		strcat(temp, ",");
+
+		strcat(temp, l->score);
+		strcat(temp, ",");
+
+		if (l->next != NULL)
+		{
+			strcat(temp, "\n");
+		}
+
+		l = l->next;
+	}
+	scoreToSend = temp;
+}
+
 void ranklist::store(list* head)
 {
 	FILE* fp = NULL;
@@ -208,8 +237,8 @@ void ranklist::store(list* head)
 	list* l = head;
 	while (l != NULL)
 	{
-		char temp[1024];
-		ZeroMemory(temp, 1024);
+		char temp[20000];
+		ZeroMemory(temp, 20000);
 		strcat(temp, l->ranklist);
 		strcat(temp, ",");
 
@@ -218,6 +247,11 @@ void ranklist::store(list* head)
 
 		strcat(temp, l->score);
 		strcat(temp, ",");
+
+		if (l->next != NULL)
+		{
+			strcat(temp, "\n");
+		}
 
 		fputs(temp, fp);
 		l = l->next;
